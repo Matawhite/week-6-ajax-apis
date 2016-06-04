@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fun with Api's</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="assets/javascript/jquery.justifiedGallery.min.js"></script>
+    <link rel="stylesheet" href="assets/css/justifiedGallery.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/main.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div id="mygallery"></div>
+    <script type="text/javascript">
+
+      var pokemon = "sloth"
+
+      var baseURL = 'http://api.giphy.com/v1/gifs/search?q=' + encodeURI(pokemon) + '&limit=10&api_key=dc6zaTOxFJmzC';
+
+      $.ajax({
+        url: baseURL,
+        method: 'GET'
+      })
+      .done(function(res){
+        for(var i = 0; i < res.data.length; i++){
+          var state = 'still';
+          var still = res.data[i].images.fixed_width_still.url;
+          var animate = res.data[i].images.fixed_width.url;
+          var imgSrc = still;
+          var newImg = $('<img>');
+          var newP = $('<p>');
+          newP.text('Rating: ' + res.data[0].rating);
+          newImg.attr('src', imgSrc);
+          newImg.attr('class', 'giphyImg');
+          newImg.attr('data-state', state);
+          newImg.attr('data-still', still);
+          newImg.attr('data-animate', animate);
+
+          $('#mygallery').prepend(newImg);
+          // $("#mygallery").justifiedGallery();
+        }
+      })
+    </script>
+  </body>
+  </html>
