@@ -15,7 +15,7 @@ $('#findPokemon').on('click', function(){
 
 function getGiphy(){
   var pokemon = $(this).text()
-  var baseURL = 'http://api.giphy.com/v1/gifs/search?q=' + encodeURI(pokemon) + '&limit=10&api_key=dc6zaTOxFJmzC';
+  var baseURL = 'https://api.giphy.com/v1/gifs/search?q=' + encodeURI(pokemon) + '&limit=10&api_key=dc6zaTOxFJmzC';
 
   $.ajax({
     url: baseURL,
